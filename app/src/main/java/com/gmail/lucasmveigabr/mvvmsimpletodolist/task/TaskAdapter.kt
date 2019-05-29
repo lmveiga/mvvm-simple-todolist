@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.gmail.lucasmveigabr.mvvmsimpletodolist.R
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -24,7 +25,7 @@ class TaskAdapter constructor(val context: Context, val onItemClick: ((Task) -> 
     fun getTask(pos: Int) = tasks[pos]
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view = LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_2, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.task_view_holder, parent, false)
         return Holder(view, onItemClick)
     }
 
