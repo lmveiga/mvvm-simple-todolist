@@ -1,23 +1,27 @@
 package com.gmail.lucasmveigabr.mvvmsimpletodolist.task
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
 interface TaskDao {
 
-    @Query("SELECT * FROM Task ORDER BY date DESC")
-    fun getTasks(): List<Task>
+    @Query("SELECT * FROM Task")
+    fun getTasks(): LiveData<List<Task>>
 
-    @Query("SELECT * FROM Task WHERE title LIKE '%'||:filter||'%' OR description LIKE '%'||:filter||'%'")
-    fun getTasks(filter: String): List<Task>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(task: Task)
+    @Query("SELECT * FROM Task WHERE title LIKE '%'||:filter||'%'")
+    fun getTasks(filter: String): LiveData<List<Task>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(task: List<Task>)
+    suspend fun insert(task: Task)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(task: List<Task>)
+
+    @Update
+    suspend fun update(task: Task)
 
     @Delete
-    fun delete(task: Task)
+    suspend fun delete(task: Task)
 
 }

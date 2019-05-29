@@ -8,10 +8,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-class TaskAdapter(val context: Context): RecyclerView.Adapter<TaskAdapter.Holder>() {
+
+class TaskAdapter constructor(val context: Context, val onItemClick: ((Task) -> Unit)): RecyclerView.Adapter<TaskAdapter.Holder>() {
 
     private var tasks: List<Task> = Collections.emptyList()
+
 
     fun setTasks(tasks: List<Task>){
         this.tasks = tasks
@@ -21,8 +24,8 @@ class TaskAdapter(val context: Context): RecyclerView.Adapter<TaskAdapter.Holder
     fun getTask(pos: Int) = tasks[pos]
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view = LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_2, parent)
-        return Holder(view)
+        val view = LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_2, parent, false)
+        return Holder(view, onItemClick)
     }
 
     override fun getItemCount(): Int {
@@ -33,11 +36,18 @@ class TaskAdapter(val context: Context): RecyclerView.Adapter<TaskAdapter.Holder
         holder.bind(tasks[position])
     }
 
-    inner class Holder(private val view: View): RecyclerView.ViewHolder(view) {
+    inner class Holder(private val view: View, private val onClick: ((Task) -> Unit)?): RecyclerView.ViewHolder(view) {
+
+        init {
+            view.setOnClickListener {
+                onClick?.invoke(tasks[adapterPosition])
+            }
+        }
 
         fun bind(task: Task){
             view.findViewById<TextView>(android.R.id.text1).text = task.title
-            view.findViewById<TextView>(android.R.id.text2).text = SimpleDateFormat("dd/MM/yyyy", Locale("pt", "BR")).format(task.date)
+            view.findViewById<TextView>(android.R.id.text2).text =
+                SimpleDateFormat("dd/MM/yyyy", Locale("pt", "BR")).format(task.creationDate)
         }
 
     }

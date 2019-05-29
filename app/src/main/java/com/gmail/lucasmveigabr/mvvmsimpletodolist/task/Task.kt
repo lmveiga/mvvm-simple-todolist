@@ -9,8 +9,5 @@ data class Task(
     @PrimaryKey(autoGenerate = true)
     var id: Long?,
     var title: String = "",
-    var description: String = "",
-    val date: Date,
-    val creationDate: Date,
-    val showNotification: Boolean
-    )
+    val creationDate: Date
+)
