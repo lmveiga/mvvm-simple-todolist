@@ -14,7 +14,8 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container,
+                .replace(
+                    R.id.container,
                     TaskFragment.newInstance()
                 )
                 .commitNow()

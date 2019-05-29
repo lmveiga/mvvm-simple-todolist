@@ -6,4 +6,5 @@ interface TaskView {
     fun searchChange(search: String)
     fun recyclerItemClick(task: Task)
     fun addDialog(text: String)
+    fun undoSnackbarClick(task: Task)
 }

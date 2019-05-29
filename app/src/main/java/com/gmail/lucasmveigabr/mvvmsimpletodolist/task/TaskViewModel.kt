@@ -11,7 +11,6 @@ import javax.inject.Inject
 
 class TaskViewModel : ViewModel(), TaskView {
 
-
     private val taskRepository: TaskRepository = App.appComponent.taskRepository()
 
     private val query = MutableLiveData<String>()
@@ -30,8 +29,11 @@ class TaskViewModel : ViewModel(), TaskView {
     }
 
     private val dialogEvent = SingleLiveEvent<Unit>()
+    private val deletedEvent = SingleLiveEvent<Task>()
 
     fun getDialogEvent() : LiveData<Unit> = dialogEvent
+    fun getDeletedEvent() : LiveData<Task> = deletedEvent
+
 
     override fun addButtonClick() {
         dialogEvent.call()
@@ -39,6 +41,7 @@ class TaskViewModel : ViewModel(), TaskView {
 
     override fun recyclerItemSwipe(task: Task) {
         taskRepository.deleteTask(task)
+        deletedEvent.value = task
     }
 
     override fun searchChange(search: String) {
@@ -50,6 +53,11 @@ class TaskViewModel : ViewModel(), TaskView {
     override fun recyclerItemClick(task: Task) {
 
     }
+
+    override fun undoSnackbarClick(task: Task) {
+        taskRepository.addTask(task)
+    }
+
 
     override fun addDialog(text: String) {
         val task = Task(null, text, Date())

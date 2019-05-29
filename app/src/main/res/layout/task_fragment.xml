@@ -6,13 +6,15 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".task.TaskFragment">
+        tools:context=".task.TaskFragment"
+        >
 
 
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/task_recycler_view"
+            android:layout_margin="4dp"
     />
 
 

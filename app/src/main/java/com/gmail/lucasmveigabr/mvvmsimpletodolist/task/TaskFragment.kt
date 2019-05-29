@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gmail.lucasmveigabr.mvvmsimpletodolist.R
 import com.gmail.lucasmveigabr.mvvmsimpletodolist.app.App
 import com.gmail.lucasmveigabr.mvvmsimpletodolist.main.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.task_fragment.*
 
 
@@ -54,6 +55,9 @@ class TaskFragment : Fragment() {
         taskViewModel.getDialogEvent().observe(viewLifecycleOwner, Observer {
             showAddDialog()
         })
+        taskViewModel.getDeletedEvent().observe(viewLifecycleOwner, Observer {
+            showDeletedSnackbar(it)
+        })
         task_recycler_view.layoutManager = LinearLayoutManager(requireActivity())
         task_recycler_view.adapter = taskAdapter
         val touchHelper = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
@@ -90,6 +94,15 @@ class TaskFragment : Fragment() {
             }
         })
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    private fun showDeletedSnackbar(task: Task){
+        view?.let {
+            Snackbar.make(it, R.string.task_deleted, Snackbar.LENGTH_LONG)
+                .setAction(R.string.undo){
+                    taskViewModel.undoSnackbarClick(task)
+                }.show()
+        }
     }
 
     private fun showAddDialog() {
