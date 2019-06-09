@@ -6,10 +6,10 @@ import androidx.room.*
 @Dao
 interface TaskDao {
 
-    @Query("SELECT * FROM Task")
+    @Query("SELECT * FROM Task ORDER BY expirationDate")
     fun getTasks(): LiveData<List<Task>>
 
-    @Query("SELECT * FROM Task WHERE title LIKE '%'||:filter||'%'")
+    @Query("SELECT * FROM Task WHERE title LIKE '%'||:filter||'%' ORDER BY expirationDate")
     fun getTasks(filter: String): LiveData<List<Task>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

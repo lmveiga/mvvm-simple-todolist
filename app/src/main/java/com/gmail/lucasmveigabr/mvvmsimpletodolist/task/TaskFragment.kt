@@ -2,7 +2,7 @@ package com.gmail.lucasmveigabr.mvvmsimpletodolist.task
 
 import android.os.Bundle
 import android.view.*
-import android.widget.EditText
+import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -15,6 +15,7 @@ import com.gmail.lucasmveigabr.mvvmsimpletodolist.R
 import com.gmail.lucasmveigabr.mvvmsimpletodolist.app.App
 import com.gmail.lucasmveigabr.mvvmsimpletodolist.main.MainViewModel
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.task_creation_view.view.*
 import kotlinx.android.synthetic.main.task_fragment.*
 
 
@@ -57,6 +58,9 @@ class TaskFragment : Fragment() {
         })
         taskViewModel.getDeletedEvent().observe(viewLifecycleOwner, Observer {
             showDeletedSnackbar(it)
+        })
+        taskViewModel.getDisplayErrorEvent().observe(viewLifecycleOwner, Observer {
+            showSnackbar(it)
         })
         task_recycler_view.layoutManager = LinearLayoutManager(requireActivity())
         task_recycler_view.adapter = taskAdapter
@@ -105,14 +109,25 @@ class TaskFragment : Fragment() {
         }
     }
 
+    private fun showSnackbar(text: String) {
+        view?.let {
+            Snackbar.make(it, text, Snackbar.LENGTH_LONG).show()
+        }
+    }
+
     private fun showAddDialog() {
         activity?.let { context ->
-            val editText = EditText(context)
+            val dialogView = LayoutInflater.from(context)
+                .inflate(R.layout.task_creation_view, LinearLayout(context), false)
             AlertDialog.Builder(context)
-                .setView(editText)
+                .setView(dialogView)
                 .setTitle(R.string.add_task)
                 .setPositiveButton(android.R.string.ok) { _, _ ->
-                    taskViewModel.addDialog(editText.text.toString())
+                    taskViewModel.addDialog(
+                        dialogView.task_edit_text.text.toString(),
+                        dialogView.date_picker.dayOfMonth, dialogView.date_picker.month,
+                        dialogView.date_picker.year
+                    )
                 }
                 .setNeutralButton(android.R.string.cancel, null)
                 .create().show()

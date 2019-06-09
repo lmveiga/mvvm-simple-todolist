@@ -5,11 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.gmail.lucasmveigabr.mvvmsimpletodolist.R
+import com.gmail.lucasmveigabr.mvvmsimpletodolist.util.setColor
 import java.text.SimpleDateFormat
 import java.util.*
-import javax.inject.Inject
 
 
 class TaskAdapter constructor(val context: Context, val onItemClick: ((Task) -> Unit)): RecyclerView.Adapter<TaskAdapter.Holder>() {
@@ -37,18 +38,35 @@ class TaskAdapter constructor(val context: Context, val onItemClick: ((Task) -> 
         holder.bind(tasks[position])
     }
 
-    inner class Holder(private val view: View, private val onClick: ((Task) -> Unit)?): RecyclerView.ViewHolder(view) {
+    inner class Holder(view: View, private val onClick: ((Task) -> Unit)?) : RecyclerView.ViewHolder(view) {
+
+        private var text1: TextView
+        private var text2: TextView
+        private var cardView: CardView
 
         init {
             view.setOnClickListener {
                 onClick?.invoke(tasks[adapterPosition])
             }
+
+            text1 = view.findViewById(R.id.text1)
+            text2 = view.findViewById(R.id.text2)
+            cardView = view.findViewById(R.id.card_view)
         }
 
         fun bind(task: Task){
-            view.findViewById<TextView>(android.R.id.text1).text = task.title
-            view.findViewById<TextView>(android.R.id.text2).text =
-                SimpleDateFormat("dd/MM/yyyy", Locale("pt", "BR")).format(task.creationDate)
+            text1.text = task.title
+            text2.text =
+                SimpleDateFormat("dd/MM/yyyy", Locale("pt", "BR")).format(task.expirationDate)
+            if (task.expirationDate.time < Date().time) {
+                text1.setColor(R.color.expiredGray, context)
+                text2.setColor(R.color.expiredRed, context)
+                cardView.setColor(R.color.expiredBackground, context)
+            } else {
+                text1.setColor(android.R.color.black, context)
+                text2.setColor(android.R.color.black, context)
+                cardView.setColor(android.R.color.white, context)
+            }
         }
 
     }

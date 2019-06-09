@@ -2,5 +2,9 @@
 <resources>
     <color name="colorPrimary">#E7E7E7</color>
     <color name="colorPrimaryDark">#CCCCCC</color>
-    <color name="colorAccent">#FF9100</color>
+    <color name="colorAccent">#039BE5</color>
+    <color name="fabColor">#37474f</color>
+    <color name="expiredBackground">#D6D6D6</color>
+    <color name="expiredGray">#4E4E4E</color>
+    <color name="expiredRed">#691717</color>
 </resources>

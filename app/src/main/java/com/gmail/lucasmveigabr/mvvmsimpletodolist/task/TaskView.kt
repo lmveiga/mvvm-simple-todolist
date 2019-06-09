@@ -5,6 +5,6 @@ interface TaskView {
     fun recyclerItemSwipe(task: Task)
     fun searchChange(search: String)
     fun recyclerItemClick(task: Task)
-    fun addDialog(text: String)
+    fun addDialog(text: String, dayOfMonth: Int, month: Int, year: Int)
     fun undoSnackbarClick(task: Task)
 }
