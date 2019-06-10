@@ -2,7 +2,7 @@ package com.gmail.lucasmveigabr.mvvmsimpletodolist.di
 
 import android.content.Context
 import androidx.room.Room
-import com.gmail.lucasmveigabr.mvvmsimpletodolist.room.TaskDatabase
+import com.gmail.lucasmveigabr.mvvmsimpletodolist.data.room.TaskDatabase
 import dagger.Module
 import dagger.Provides
 

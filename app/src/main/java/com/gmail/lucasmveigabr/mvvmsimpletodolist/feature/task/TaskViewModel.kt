@@ -1,4 +1,4 @@
-package com.gmail.lucasmveigabr.mvvmsimpletodolist.task
+package com.gmail.lucasmveigabr.mvvmsimpletodolist.feature.task
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -7,6 +7,8 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.gmail.lucasmveigabr.mvvmsimpletodolist.R
 import com.gmail.lucasmveigabr.mvvmsimpletodolist.app.App
+import com.gmail.lucasmveigabr.mvvmsimpletodolist.data.model.Task
+import com.gmail.lucasmveigabr.mvvmsimpletodolist.data.repo.TaskRepository
 import com.gmail.lucasmveigabr.mvvmsimpletodolist.util.SingleLiveEvent
 import java.util.*
 
@@ -78,7 +80,12 @@ class TaskViewModel : ViewModel(), TaskView {
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
         calendar.set(Calendar.MONTH, month)
         calendar.set(Calendar.YEAR, year)
-        val task = Task(null, text, Date(), Date(calendar.timeInMillis))
+        val task = Task(
+            null,
+            text,
+            Date(),
+            Date(calendar.timeInMillis)
+        )
         taskRepository.addTask(task)
     }
 

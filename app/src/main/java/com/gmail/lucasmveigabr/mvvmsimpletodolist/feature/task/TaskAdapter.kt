@@ -1,4 +1,4 @@
-package com.gmail.lucasmveigabr.mvvmsimpletodolist.task
+package com.gmail.lucasmveigabr.mvvmsimpletodolist.feature.task
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.gmail.lucasmveigabr.mvvmsimpletodolist.R
+import com.gmail.lucasmveigabr.mvvmsimpletodolist.data.model.Task
 import com.gmail.lucasmveigabr.mvvmsimpletodolist.util.setColor
 import com.gmail.lucasmveigabr.mvvmsimpletodolist.util.simpleFormat
 import java.util.*

@@ -1,4 +1,6 @@
-package com.gmail.lucasmveigabr.mvvmsimpletodolist.task
+package com.gmail.lucasmveigabr.mvvmsimpletodolist.feature.task
+
+import com.gmail.lucasmveigabr.mvvmsimpletodolist.data.model.Task
 
 interface TaskView {
     fun addButtonClick()

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MVVM Simple Todo List</string>
     <string name="tasks">Tasks</string>
-    <string name="search">Pesquisa</string>
+    <string name="search">Search</string>
     <string name="add_task">Add Task</string>
     <string name="task_deleted">Task Deleted!</string>
     <string name="undo">Undo</string>

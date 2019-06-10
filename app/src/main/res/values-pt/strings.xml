@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MVVM Simple Todo List</string>
+    <string name="tasks">Tarefas</string>
+    <string name="search">Pesquisa</string>
+    <string name="add_task">Adicionar Tarefa</string>
+    <string name="task_deleted">Tarefa Deletada!</string>
+    <string name="undo">Desfazer</string>
+    <string name="task">Tarefa</string>
+    <string name="expire_date">Data de Entrega</string>
+    <string name="empty_task_error">Você não pode criar uma tarefa vazia!</string>
+    <string name="creation_date">Data de Criação</string>
+    <string name="expiration_date">Data de Entrega</string>
+    <string name="task_details">Detalhes da Tarefa</string>
+    <string name="delete_task">Deletar Tarefa</string>
+    <string name="close">Fechar</string>
+</resources>

@@ -1,7 +1,8 @@
-package com.gmail.lucasmveigabr.mvvmsimpletodolist.task
+package com.gmail.lucasmveigabr.mvvmsimpletodolist.data.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.gmail.lucasmveigabr.mvvmsimpletodolist.data.model.Task
 
 @Dao
 interface TaskDao {

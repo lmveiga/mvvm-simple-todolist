@@ -1,10 +1,10 @@
-package com.gmail.lucasmveigabr.mvvmsimpletodolist.room
+package com.gmail.lucasmveigabr.mvvmsimpletodolist.data.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.gmail.lucasmveigabr.mvvmsimpletodolist.task.Task
-import com.gmail.lucasmveigabr.mvvmsimpletodolist.task.TaskDao
+import com.gmail.lucasmveigabr.mvvmsimpletodolist.data.model.Task
+import com.gmail.lucasmveigabr.mvvmsimpletodolist.data.room.converter.DateTypeConverter
 
 @Database(version = 3, entities = [Task::class], exportSchema = false)
 @TypeConverters(DateTypeConverter::class)

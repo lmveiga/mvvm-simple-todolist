@@ -1,4 +1,4 @@
-package com.gmail.lucasmveigabr.mvvmsimpletodolist.task
+package com.gmail.lucasmveigabr.mvvmsimpletodolist.feature.task
 
 import android.os.Bundle
 import android.view.*
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gmail.lucasmveigabr.mvvmsimpletodolist.R
 import com.gmail.lucasmveigabr.mvvmsimpletodolist.app.App
-import com.gmail.lucasmveigabr.mvvmsimpletodolist.main.MainViewModel
+import com.gmail.lucasmveigabr.mvvmsimpletodolist.data.model.Task
 import com.gmail.lucasmveigabr.mvvmsimpletodolist.util.simpleFormat
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.task_creation_view.view.*
@@ -23,15 +23,14 @@ import kotlinx.android.synthetic.main.task_fragment.*
 
 class TaskFragment : Fragment() {
 
-    private val taskAdapter = TaskAdapter(App.appComponent.appContext()) {
-        taskViewModel.recyclerItemClick(it)
-    }
+    private val taskAdapter =
+        TaskAdapter(App.appComponent.appContext()) {
+            taskViewModel.recyclerItemClick(it)
+        }
 
     companion object {
         fun newInstance() = TaskFragment()
     }
-
-    private lateinit var viewModel: MainViewModel
     private lateinit var taskViewModel: TaskViewModel
 
 
@@ -50,7 +49,6 @@ class TaskFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(requireActivity()).get(MainViewModel::class.java)
         taskViewModel = ViewModelProviders.of(this).get(TaskViewModel::class.java)
         taskViewModel.getTasks().observe(viewLifecycleOwner, Observer { tasks ->
             taskAdapter.setTasks(tasks)

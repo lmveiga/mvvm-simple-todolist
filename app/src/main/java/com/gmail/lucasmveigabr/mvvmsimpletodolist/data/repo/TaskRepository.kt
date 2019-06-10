@@ -1,5 +1,7 @@
-package com.gmail.lucasmveigabr.mvvmsimpletodolist.task
+package com.gmail.lucasmveigabr.mvvmsimpletodolist.data.repo
 
+import com.gmail.lucasmveigabr.mvvmsimpletodolist.data.model.Task
+import com.gmail.lucasmveigabr.mvvmsimpletodolist.data.room.TaskDao
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
