@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gmail.lucasmveigabr.mvvmsimpletodolist.R
 import com.gmail.lucasmveigabr.mvvmsimpletodolist.app.App
 import com.gmail.lucasmveigabr.mvvmsimpletodolist.main.MainViewModel
+import com.gmail.lucasmveigabr.mvvmsimpletodolist.util.simpleFormat
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.task_creation_view.view.*
+import kotlinx.android.synthetic.main.task_detail_view.view.*
 import kotlinx.android.synthetic.main.task_fragment.*
 
 
@@ -62,6 +64,9 @@ class TaskFragment : Fragment() {
         taskViewModel.getDisplayErrorEvent().observe(viewLifecycleOwner, Observer {
             showSnackbar(it)
         })
+        taskViewModel.getDisplayTaskDetails().observe(viewLifecycleOwner, Observer {
+            showTaskDialog(it)
+        })
         task_recycler_view.layoutManager = LinearLayoutManager(requireActivity())
         task_recycler_view.adapter = taskAdapter
         val touchHelper = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
@@ -106,6 +111,24 @@ class TaskFragment : Fragment() {
                 .setAction(R.string.undo){
                     taskViewModel.undoSnackbarClick(task)
                 }.show()
+        }
+    }
+
+    private fun showTaskDialog(task: Task) {
+        activity?.let { context ->
+            val dialogView = LayoutInflater.from(context)
+                .inflate(R.layout.task_detail_view, LinearLayout(context), false)
+            dialogView.task_text_view.text = task.title
+            dialogView.creation_date_text_view.text = task.creationDate.simpleFormat()
+            dialogView.expiration_date_text_view.text = task.expirationDate.simpleFormat()
+            AlertDialog.Builder(context)
+                .setView(dialogView)
+                .setTitle(R.string.task_details)
+                .setNeutralButton(R.string.close, null)
+                .setNegativeButton(R.string.delete_task) { _, _ ->
+                    taskViewModel.deleteTaskClick(task)
+                }
+                .create().show()
         }
     }
 

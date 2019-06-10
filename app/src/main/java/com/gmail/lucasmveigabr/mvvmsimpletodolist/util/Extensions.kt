@@ -4,6 +4,8 @@ import android.content.Context
 import android.os.Build
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import java.text.SimpleDateFormat
+import java.util.*
 
 fun TextView.setColor(colorRes: Int, context: Context) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -20,3 +22,6 @@ fun CardView.setColor(colorRes: Int, context: Context) {
         this.setCardBackgroundColor(context.resources.getColor(colorRes))
     }
 }
+
+fun Date.simpleFormat() =
+    SimpleDateFormat("dd/MM/yyyy", Locale("pt", "BR")).format(this)

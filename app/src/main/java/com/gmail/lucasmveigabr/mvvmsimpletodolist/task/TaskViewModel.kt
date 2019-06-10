@@ -31,20 +31,27 @@ class TaskViewModel : ViewModel(), TaskView {
     }
 
     private val dialogEvent = SingleLiveEvent<Unit>()
+    private val displayTaskDetails = SingleLiveEvent<Task>()
     private val deletedEvent = SingleLiveEvent<Task>()
     private val displayError = SingleLiveEvent<String>()
 
     fun getDialogEvent() : LiveData<Unit> = dialogEvent
     fun getDeletedEvent() : LiveData<Task> = deletedEvent
     fun getDisplayErrorEvent(): LiveData<String> = displayError
+    fun getDisplayTaskDetails(): LiveData<Task> = displayTaskDetails
+
+
+    private fun deleteTask(task: Task) {
+        taskRepository.deleteTask(task)
+        deletedEvent.value = task
+    }
 
     override fun addButtonClick() {
         dialogEvent.call()
     }
 
     override fun recyclerItemSwipe(task: Task) {
-        taskRepository.deleteTask(task)
-        deletedEvent.value = task
+        deleteTask(task)
     }
 
     override fun searchChange(search: String) {
@@ -54,7 +61,7 @@ class TaskViewModel : ViewModel(), TaskView {
     }
 
     override fun recyclerItemClick(task: Task) {
-
+        displayTaskDetails.value = task
     }
 
     override fun undoSnackbarClick(task: Task) {
@@ -75,5 +82,8 @@ class TaskViewModel : ViewModel(), TaskView {
         taskRepository.addTask(task)
     }
 
+    override fun deleteTaskClick(task: Task) {
+        deleteTask(task)
+    }
 
 }

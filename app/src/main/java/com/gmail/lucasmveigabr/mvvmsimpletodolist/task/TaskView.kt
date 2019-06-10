@@ -7,4 +7,5 @@ interface TaskView {
     fun recyclerItemClick(task: Task)
     fun addDialog(text: String, dayOfMonth: Int, month: Int, year: Int)
     fun undoSnackbarClick(task: Task)
+    fun deleteTaskClick(task: Task)
 }

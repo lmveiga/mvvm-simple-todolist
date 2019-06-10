@@ -8,4 +8,9 @@
     <string name="task">Task</string>
     <string name="expire_date">Expire Date</string>
     <string name="empty_task_error">You can\'t create an empty task!</string>
+    <string name="creation_date">Creation Date</string>
+    <string name="expiration_date">Expiration Date</string>
+    <string name="task_details">Task Details</string>
+    <string name="delete_task">Delete Task</string>
+    <string name="close">Close</string>
 </resources>

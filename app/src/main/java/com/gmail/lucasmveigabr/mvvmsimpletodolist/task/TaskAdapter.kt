@@ -9,7 +9,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.gmail.lucasmveigabr.mvvmsimpletodolist.R
 import com.gmail.lucasmveigabr.mvvmsimpletodolist.util.setColor
-import java.text.SimpleDateFormat
+import com.gmail.lucasmveigabr.mvvmsimpletodolist.util.simpleFormat
 import java.util.*
 
 
@@ -56,8 +56,7 @@ class TaskAdapter constructor(val context: Context, val onItemClick: ((Task) -> 
 
         fun bind(task: Task){
             text1.text = task.title
-            text2.text =
-                SimpleDateFormat("dd/MM/yyyy", Locale("pt", "BR")).format(task.expirationDate)
+            text2.text = task.expirationDate.simpleFormat()
             if (task.expirationDate.time < Date().time) {
                 text1.setColor(R.color.expiredGray, context)
                 text2.setColor(R.color.expiredRed, context)
